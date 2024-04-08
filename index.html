@@ -19,6 +19,7 @@
     <label id="email-profile"></label>
     </div>
     
+    <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" charset="utf-8">
    const idProfile = document.getElementById("id-profile");
@@ -31,14 +32,13 @@
           idProfile.textContent = 'ID: ' + profile.getId(); // Do not send to your backend! Use an ID token instead.
            nameProfile.textContent = 'Name: ' + profile.getName();
            imgProfile.src = profile.getImageUrl();
-           emailProfile.textContent = 'Email: ' + profile.getEmail(); // This is null if the 'email' scope is not present.
+           emailProfile.textContent = 'Email: ' + profile.getEmail();
         }
 
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        alert('logout success')
-    });
+    auth2.signOut();
+    alert('Logged out successfully');
   }
     </script>
 </body>
