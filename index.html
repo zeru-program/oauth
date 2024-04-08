@@ -10,7 +10,8 @@
 <body>
     
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <button onclick="signOut()">Log out</button>   
+    <button type="button" onclick="signOut()">Log out</button>   
+    <hr>
     <hr>
     <div style="padding-top:50px;">   
     <label id="id-profile"></label>   
@@ -26,14 +27,18 @@
    const nameProfile = document.getElementById("name-profile");
    const imgProfile = document.getElementById("image-profile");
    const emailProfile = document.getElementById("email-profile");
-    
-        function onSignIn(googleUser) {
-          var profile = googleUser.getBasicProfile();
-          idProfile.textContent = 'ID: ' + profile.getId(); // Do not send to your backend! Use an ID token instead.
-           nameProfile.textContent = 'Name: ' + profile.getName();
-           imgProfile.src = profile.getImageUrl();
-           emailProfile.textContent = 'Email: ' + profile.getEmail();
-        }
+    function onSignIn(googleUser) {
+  try {
+    var profile = googleUser.getBasicProfile();
+    idProfile.textContent = 'ID: ' + profile.getId();
+    nameProfile.textContent = 'Name: ' + profile.getName();
+    imgProfile.src = profile.getImageUrl();
+    emailProfile.textContent = 'Email: ' + profile.getEmail();
+  } catch (error) {
+    alert('Error in onSignIn: ' + error);
+  }
+}
+
 
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
